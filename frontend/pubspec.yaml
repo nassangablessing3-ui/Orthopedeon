@@ -22,7 +22,7 @@ dependencies:
   shared_preferences: ^2.2.3
 
   # Navigation
- go_router: ^14.2.0
+ go_router:
 
   # UI
   google_fonts: ^6.2.1
