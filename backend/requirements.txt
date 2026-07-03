@@ -20,7 +20,6 @@ python-multipart==0.0.9
 # pydantic-core 2.18.2 tries to compile from source (Rust) on Python 3.12 free
 # tier; 2.20.0+ ships cp312 manylinux wheels.
 pydantic==2.7.1
-pydantic-core==2.20.0
 pydantic-settings==2.3.0
 
 # ── OpenAI ────────────────────────────────────────────────────────────────────
