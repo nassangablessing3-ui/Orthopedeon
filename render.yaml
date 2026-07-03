@@ -1,0 +1,37 @@
+# render.yaml — single-service deploy for Orth_pedeon
+# Backend (FastAPI/Gunicorn) + Flutter Web served from the same process.
+# No Docker needed — Render's native Python environment handles everything.
+
+services:
+  - type: web
+    name: orthpedeon
+    runtime: python
+    pythonVersion: "3.12"          # <── pin to 3.12; avoids Pillow / asyncpg breakage on 3.14
+
+    # Runs from repo root
+    buildCommand: chmod +x scripts/build.sh && ./scripts/build.sh
+
+    # Gunicorn with UvicornWorker for async FastAPI support
+    startCommand: gunicorn -c backend/gunicorn.conf.py backend.app.main:app
+
+    plan: free
+
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: orthpedeon-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false          # add manually in Render dashboard
+      - key: APP_ENV
+        value: production
+      - key: PYTHON_VERSION
+        value: "3.12.4"
+
+databases:
+  - name: orthpedeon-db
+    plan: free
+    databaseName: orthpedeon
+    user: orthpedeon

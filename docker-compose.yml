@@ -1,0 +1,36 @@
+# docker-compose.yml — LOCAL development only
+# Runs Postgres + backend together. Flutter runs separately via `flutter run`.
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: orthpedeon
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    image: python:3.12-slim
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres:password@db:5432/orthpedeon
+    depends_on:
+      - db
+    command: >
+      bash -c "pip install -r requirements.txt -q &&
+               gunicorn -c gunicorn.conf.py app.main:app"
+
+volumes:
+  pgdata:
