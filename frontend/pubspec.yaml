@@ -9,7 +9,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # cupertino_icons must be present — Flutter expects it for CupertinoIcons font
   cupertino_icons: ^1.0.8
 
   # ── HTTP ───────────────────────────────────────────────────────────────────
@@ -36,7 +35,6 @@ dependencies:
   speech_to_text: ^7.0.0
   flutter_tts: ^4.0.2
   image_picker: ^1.1.1
-  # Hard-pinned — 11.3.x requires Dart >=3.5.0; Flutter 3.22.2 ships Dart 3.4.3
   permission_handler: 11.2.0
 
   # ── Notifications ──────────────────────────────────────────────────────────
@@ -55,3 +53,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/icons/app_icon.png

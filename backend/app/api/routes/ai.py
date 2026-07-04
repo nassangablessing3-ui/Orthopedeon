@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
-from app.schemas.ai import VoiceCommandRequest, VoiceCommandResponse, OCRRequest, OCRResponse
-from app.services.auth_service import get_current_user
-from app.ai.openai_service import process_voice_command, perform_ocr
-from app.models.user import User
+from backend.app.schemas.ai import VoiceCommandRequest, VoiceCommandResponse, OCRRequest, OCRResponse
+from backend.app.services.auth_service import get_current_user
+from backend.app.ai.openai_service import process_voice_command, perform_ocr
+from backend.app.models.user import User
 
 router = APIRouter(prefix="/ai", tags=["AI"])
 

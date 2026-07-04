@@ -2,7 +2,7 @@
 AI service layer — wraps OpenAI for voice, mood, sentiment, and OCR responses.
 Falls back gracefully if OPENAI_API_KEY is not set.
 """
-from app.core.config import settings
+from backend.app.core.config import settings
 import base64
 import io
 

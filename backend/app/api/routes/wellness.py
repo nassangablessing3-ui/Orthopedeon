@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
-from app.db.database import get_db
-from app.schemas.wellness import MoodLogCreate, MoodLogOut, JournalCreate, JournalOut, ReminderCreate, ReminderOut
-from app.services.auth_service import get_current_user
-from app.services.wellness_service import log_mood, get_mood_history, create_journal, get_journals, create_reminder, get_reminders
-from app.models.user import User
+from backend.app.db.database import get_db
+from backend.app.schemas.wellness import MoodLogCreate, MoodLogOut, JournalCreate, JournalOut, ReminderCreate, ReminderOut
+from backend.app.services.auth_service import get_current_user
+from backend.app.services.wellness_service import log_mood, get_mood_history, create_journal, get_journals, create_reminder, get_reminders
+from backend.app.models.user import User
 
 router = APIRouter(prefix="/wellness", tags=["Wellness"])
 

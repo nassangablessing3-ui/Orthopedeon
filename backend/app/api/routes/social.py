@@ -2,11 +2,11 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List, Optional
 import uuid
-from app.db.database import get_db
-from app.schemas.social import GroupOut, MessageCreate, MessageOut
-from app.services.auth_service import get_current_user
-from app.services.social_service import list_groups, join_group, get_messages, send_message
-from app.models.user import User
+from backend.app.db.database import get_db
+from backend.app.schemas.social import GroupOut, MessageCreate, MessageOut
+from backend.app.services.auth_service import get_current_user
+from backend.app.services.social_service import list_groups, join_group, get_messages, send_message
+from backend.app.models.user import User
 
 router = APIRouter(prefix="/social", tags=["Social"])
 

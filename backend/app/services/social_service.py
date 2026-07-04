@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, desc
-from app.models.social import CommunityGroup, GroupMembership, GroupMessage
+from backend.app.models.social import CommunityGroup, GroupMembership, GroupMessage
 import uuid
 
 

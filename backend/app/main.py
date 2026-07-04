@@ -3,9 +3,9 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from pathlib import Path
-from app.core.config import settings
-from app.db.database import init_db
-from app.api.routes import auth, users, wellness, social, ai
+from backend.app.core.config import settings
+from backend.app.db.database import init_db
+from backend.app.api.routes import auth, users, wellness, social, ai
 
 
 @asynccontextmanager

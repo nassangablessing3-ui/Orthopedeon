@@ -1,5 +1,4 @@
 # render.yaml — Orth_pedeon single-service deploy
-# Flutter Web + FastAPI/Gunicorn served from one Render web service.
 
 services:
   - type: web
@@ -7,14 +6,11 @@ services:
     runtime: python
     pythonVersion: "3.12"
 
-    # Runs from repo root
     buildCommand: chmod +x scripts/build.sh && ./scripts/build.sh
 
-    # ── Start command ─────────────────────────────────────────────────────────
-    # gunicorn.conf.py sets chdir=backend/ so `app.main:app` resolves correctly.
-    # We pass the app as `app.main:app` (not backend.app.main:app) because
-    # gunicorn.conf.py already changes the working directory to backend/.
-    startCommand: gunicorn -c backend/gunicorn.conf.py app.main:app
+    # All internal imports use backend.app.* — Render runs this from repo root.
+    # gunicorn.conf.py handles worker class, port binding, and logging.
+    startCommand: gunicorn -c backend/gunicorn.conf.py backend.app.main:app
 
     plan: free
 

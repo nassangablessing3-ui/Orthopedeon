@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from datetime import datetime
 import uuid
 import enum
-from app.db.database import Base
+from backend.app.db.database import Base
 
 
 class DisabilityType(str, enum.Enum):

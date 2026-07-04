@@ -1,8 +1,8 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, desc
-from app.models.wellness import MoodLog, JournalEntry, Reminder
-from app.schemas.wellness import MoodLogCreate, JournalCreate, ReminderCreate
-from app.ai.openai_service import get_mood_feedback, get_sentiment_score
+from backend.app.models.wellness import MoodLog, JournalEntry, Reminder
+from backend.app.schemas.wellness import MoodLogCreate, JournalCreate, ReminderCreate
+from backend.app.ai.openai_service import get_mood_feedback, get_sentiment_score
 import uuid
 
 

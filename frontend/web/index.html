@@ -1,94 +1,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder comment for the content of your index.html.
-  -->
   <base href="$FLUTTER_BASE_HREF">
-
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="AI-powered accessibility and wellbeing platform for people with disabilities.">
-
-  <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Orth_pedeon">
+  <meta name="theme-color" content="#1A0B3B">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
-
   <title>Orth_pedeon</title>
   <link rel="manifest" href="manifest.json">
 
   <style>
-    body {
-      margin: 0;
-      background-color: #1A0B3B;
-    }
-    /* Loading screen shown while Flutter initialises */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0D0630; }
+
     #loading {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      background: linear-gradient(160deg, #1A0B3B 0%, #2D1463 60%, #5B2D8E 100%);
-      font-family: sans-serif;
-      color: rgba(255,255,255,0.7);
-      gap: 20px;
+      background: linear-gradient(145deg, #0D0630 0%, #1A0B3B 50%, #2D0E6E 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      gap: 0;
     }
-    #loading-logo {
-      width: 80px;
-      height: 80px;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.1);
-      border: 1.5px solid rgba(255,255,255,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 40px;
+
+    #loading-icon {
+      width: 110px;
+      height: 110px;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 0 40px rgba(124,58,237,0.6);
+      animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
     }
+
+    #loading-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     #loading-title {
-      font-size: 24px;
-      font-weight: 500;
-      color: #fff;
-      letter-spacing: -0.3px;
+      margin-top: 22px;
+      font-size: 26px;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: -0.4px;
+      animation: fadeUp 0.5s 0.3s ease both;
     }
+
+    #loading-tagline {
+      margin-top: 8px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.4px;
+      animation: fadeUp 0.5s 0.45s ease both;
+    }
+
     #loading-spinner {
-      width: 28px;
-      height: 28px;
-      border: 2px solid rgba(200,168,248,0.3);
-      border-top-color: #C8A8F8;
+      margin-top: 52px;
+      width: 24px;
+      height: 24px;
+      border: 2px solid rgba(200,168,248,0.2);
+      border-top-color: rgba(200,168,248,0.7);
       border-radius: 50%;
-      animation: spin 0.8s linear infinite;
+      animation: spin 0.8s linear infinite, fadeUp 0.5s 0.6s ease both;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @keyframes spin    { to { transform: rotate(360deg); } }
+    @keyframes popIn   { from { opacity:0; transform:scale(0.7); } to { opacity:1; transform:scale(1); } }
+    @keyframes fadeUp  { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
   </style>
 </head>
 <body>
-  <!-- Loading placeholder — hidden once Flutter renders -->
   <div id="loading">
-    <div id="loading-logo">♿</div>
+    <div id="loading-icon">
+      <img src="icons/Icon-192.png" alt="Orth_pedeon icon">
+    </div>
     <div id="loading-title">Orth_pedeon</div>
+    <div id="loading-tagline">Independence · Connection · Joy</div>
     <div id="loading-spinner"></div>
   </div>
 
   <script>
     window.addEventListener('flutter-first-frame', function () {
-      var loading = document.getElementById('loading');
-      if (loading) loading.style.display = 'none';
+      var el = document.getElementById('loading');
+      if (el) {
+        el.style.transition = 'opacity 0.4s ease';
+        el.style.opacity = '0';
+        setTimeout(function(){ el.remove(); }, 400);
+      }
     });
   </script>
 
