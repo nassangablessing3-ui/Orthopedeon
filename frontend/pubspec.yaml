@@ -3,13 +3,14 @@ description: AI-powered accessibility and wellbeing app for people with disabili
 version: 1.0.0+1
 
 environment:
-  # Flutter 3.22.2 ships Dart 3.4.3. Upper bound <3.5.0 prevents pub from
-  # resolving packages that require Dart 3.5+ (e.g. permission_handler 11.3.x)
   sdk: ">=3.4.0 <3.5.0"
 
 dependencies:
   flutter:
     sdk: flutter
+
+  # cupertino_icons must be present — Flutter expects it for CupertinoIcons font
+  cupertino_icons: ^1.0.8
 
   # ── HTTP ───────────────────────────────────────────────────────────────────
   dio: ^5.4.3
@@ -35,7 +36,7 @@ dependencies:
   speech_to_text: ^7.0.0
   flutter_tts: ^4.0.2
   image_picker: ^1.1.1
-  # Hard-pinned — 11.3.x requires Dart >=3.5.0 which Flutter 3.22.2 does not ship
+  # Hard-pinned — 11.3.x requires Dart >=3.5.0; Flutter 3.22.2 ships Dart 3.4.3
   permission_handler: 11.2.0
 
   # ── Notifications ──────────────────────────────────────────────────────────
@@ -54,5 +55,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  # No asset entries — assets folder only has .gitkeep placeholders.
-  # Add real image/animation paths here when you add actual asset files.
