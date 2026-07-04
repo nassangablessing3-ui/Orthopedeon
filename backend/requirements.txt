@@ -1,5 +1,4 @@
 # ── Web framework ─────────────────────────────────────────────────────────────
-# Pin to versions with pre-built Python 3.12 wheels — avoids Rust/Cargo builds
 fastapi==0.111.0
 gunicorn==22.0.0
 uvicorn[standard]==0.30.1
@@ -8,7 +7,6 @@ uvicorn[standard]==0.30.1
 sqlalchemy==2.0.30
 alembic==1.13.1
 asyncpg==0.29.0
-# psycopg2-binary needs a C compiler; use the manylinux pre-built wheel
 psycopg2-binary==2.9.9
 
 # ── Auth ──────────────────────────────────────────────────────────────────────
@@ -16,17 +14,21 @@ python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
 python-multipart==0.0.9
 
-# ── Pydantic — pin pydantic-core to a version that ships a cp312 wheel ────────
-# pydantic-core 2.18.2 tries to compile from source (Rust) on Python 3.12 free
-# tier; 2.20.0+ ships cp312 manylinux wheels.
-pydantic==2.7.1
+# ── Pydantic — pydantic-core MUST match what pydantic==2.7.1 requires exactly.
+#    pydantic 2.7.1 pins pydantic-core==2.18.2.
+#    We do NOT override pydantic-core separately — let pip resolve it.
+#    The previous error was caused by pinning pydantic-core==2.20.0 while
+#    pydantic==2.7.1 hard-requires pydantic-core==2.18.2.
+#    Solution: upgrade pydantic to 2.8.2 which ships pydantic-core 2.20.0
+#    and has pre-built cp312 manylinux wheels for both packages.
+pydantic==2.8.2
 pydantic-settings==2.3.0
 
 # ── OpenAI ────────────────────────────────────────────────────────────────────
 openai==1.30.1
 httpx==0.27.0
 
-# ── Image processing — use pre-built manylinux wheels only ───────────────────
+# ── Image processing — pre-built cp312 manylinux wheels only ─────────────────
 Pillow==10.4.0
 pytesseract==0.3.10
 opencv-python-headless==4.10.0.84

@@ -3,25 +3,21 @@ description: AI-powered accessibility and wellbeing app for people with disabili
 version: 1.0.0+1
 
 environment:
-  # Flutter 3.22.2 ships Dart 3.4.3 — keep SDK constraint matching that exactly
-  sdk: ">=3.4.0 <4.0.0"
+  # Flutter 3.22.2 ships Dart 3.4.3. Upper bound <3.5.0 prevents pub from
+  # resolving packages that require Dart 3.5+ (e.g. permission_handler 11.3.x)
+  sdk: ">=3.4.0 <3.5.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  # ── HTTP & API ─────────────────────────────────────────────────────────────
+  # ── HTTP ───────────────────────────────────────────────────────────────────
   dio: ^5.4.3
-  # retrofit removed from runtime — only needed as a dev code-gen tool.
-  # We call the API directly via dio, so retrofit isn't needed at all.
 
   # ── State management ───────────────────────────────────────────────────────
   flutter_riverpod: ^2.5.1
-  # riverpod_annotation moved to dev_dependencies (it's a code-gen annotation)
 
   # ── Storage ────────────────────────────────────────────────────────────────
-  # flutter_secure_storage 10.x is still in beta and breaks on Android/Web;
-  # pin to the latest stable 9.x release.
   flutter_secure_storage: ^9.2.4
   shared_preferences: ^2.2.3
 
@@ -35,13 +31,12 @@ dependencies:
   shimmer: ^3.0.0
   cached_network_image: ^3.3.1
 
-  # ── Accessibility / AI features ─────────────────────────────────────────────
+  # ── Accessibility / AI ─────────────────────────────────────────────────────
   speech_to_text: ^7.0.0
   flutter_tts: ^4.0.2
   image_picker: ^1.1.1
-  # permission_handler 11.3.x requires Dart >=3.5.0 but Flutter 3.22 ships
-  # Dart 3.4.3. Pin to 11.2.x which is compatible with Dart 3.4.x.
-  permission_handler: ^11.2.0
+  # Hard-pinned — 11.3.x requires Dart >=3.5.0 which Flutter 3.22.2 does not ship
+  permission_handler: 11.2.0
 
   # ── Notifications ──────────────────────────────────────────────────────────
   flutter_local_notifications: ^17.1.2
@@ -56,17 +51,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
-  # Code-gen tools — only needed locally if you use @riverpod annotations
-  # or retrofit. Excluded from the production build automatically.
-  # build_runner: ^2.4.11
-  # retrofit_generator: ^8.1.0
-  # riverpod_annotation: ^2.3.5
-  # riverpod_generator: ^2.4.3
 
 flutter:
   uses-material-design: true
-
-  assets:
-    - assets/images/
-    - assets/animations/
-    - assets/icons/
+  # No asset entries — assets folder only has .gitkeep placeholders.
+  # Add real image/animation paths here when you add actual asset files.

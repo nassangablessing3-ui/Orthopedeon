@@ -1,20 +1,16 @@
-# render.yaml — single-service deploy for Orth_pedeon
-# Flutter Web + FastAPI/Gunicorn served from one Render web service.
+# render.yaml — Orth_pedeon single-service deploy
+# Flutter Web + FastAPI/Gunicorn from one Render web service, no Docker.
 
 services:
   - type: web
     name: orthpedeon
     runtime: python
+    pythonVersion: "3.12"        # Render major.minor selector
 
-    # ── Python version ─────────────────────────────────────────────────────
-    # Explicitly pin to 3.12.8 — avoids Render defaulting to 3.14 which
-    # breaks pydantic-core (needs Rust/Cargo) and Pillow (no wheel yet).
-    pythonVersion: "3.12"
-
-    # ── Build: runs from repo root ──────────────────────────────────────────
+    # Runs from repo root
     buildCommand: chmod +x scripts/build.sh && ./scripts/build.sh
 
-    # ── Start: Gunicorn + UvicornWorker for async FastAPI ──────────────────
+    # Gunicorn with UvicornWorker — required for FastAPI async support
     startCommand: gunicorn -c backend/gunicorn.conf.py backend.app.main:app
 
     plan: free
@@ -27,12 +23,11 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: OPENAI_API_KEY
-        sync: false
+        sync: false              # add manually in Render dashboard
       - key: APP_ENV
         value: production
-      # Force Render's Python environment to exactly 3.12.8
       - key: PYTHON_VERSION
-        value: "3.12.8"
+        value: "3.12.8"         # exact patch — prevents Render defaulting to 3.14
 
 databases:
   - name: orthpedeon-db
