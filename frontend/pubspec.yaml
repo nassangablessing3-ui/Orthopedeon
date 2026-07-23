@@ -31,10 +31,15 @@ dependencies:
   shimmer: ^3.0.0
   cached_network_image: ^3.3.1
 
+  # ── OS integration — calls, app launching, URLs ────────────────────────────
+  # Used by VoiceService, CareScreen (phone calls), SocialScreen (app launch)
+  url_launcher: ^6.2.5
+
   # ── Accessibility / AI ─────────────────────────────────────────────────────
   speech_to_text: ^7.0.0
   flutter_tts: ^4.0.2
   image_picker: ^1.1.1
+  # Hard-pinned — 11.3.x requires Dart >=3.5.0; Flutter 3.22.2 ships Dart 3.4.3
   permission_handler: 11.2.0
 
   # ── Notifications ──────────────────────────────────────────────────────────
@@ -53,6 +58,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
   assets:
     - assets/icons/app_icon.png

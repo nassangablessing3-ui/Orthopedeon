@@ -1,51 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AppTheme {
-  static const _primary = Color(0xFF7C3AED);
+class AppColors {
+  // Each screen has its own distinct gradient pair
+  static const homeGrad    = [Color(0xFF1A0B3B), Color(0xFF4A1B8A)]; // Deep purple
+  static const funGrad     = [Color(0xFFB45309), Color(0xFFD97706)]; // Amber/orange
+  static const aiGrad      = [Color(0xFF0C4A6E), Color(0xFF0284C7)]; // Ocean blue
+  static const careGrad    = [Color(0xFF064E3B), Color(0xFF059669)]; // Emerald green
+  static const socialGrad  = [Color(0xFF831843), Color(0xFFDB2777)]; // Hot pink
+  static const profileGrad = [Color(0xFF1E3A5F), Color(0xFF2563EB)]; // Royal blue
+  static const voiceGrad   = [Color(0xFF4C0519), Color(0xFFBE123C)]; // Crimson red
 
+  // Tab accent colours
+  static const home    = Color(0xFF7C3AED);
+  static const fun     = Color(0xFFD97706);
+  static const ai      = Color(0xFF0284C7);
+  static const care    = Color(0xFF059669);
+  static const social  = Color(0xFFDB2777);
+  static const profile = Color(0xFF2563EB);
+}
+
+class AppTheme {
   static ThemeData get light => ThemeData(
     useMaterial3: true,
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: _primary,
-      brightness: Brightness.light,
-    ),
-    textTheme: GoogleFonts.interTextTheme(),
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.white,
-      foregroundColor: Color(0xFF1A0B3B),
-      elevation: 0,
-      centerTitle: true,
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: _primary,
-        foregroundColor: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 32),
-        textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-      ),
-    ),
-    inputDecorationTheme: InputDecorationTheme(
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: Color(0xFFE2E0F0)),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: _primary, width: 1.5),
-      ),
-      filled: true,
-      fillColor: const Color(0xFFF8F7FF),
-    ),
+    colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF7C3AED)),
+    textTheme: GoogleFonts.poppinsTextTheme(),
+    scaffoldBackgroundColor: const Color(0xFFF8F7FF),
   );
 
   static ThemeData get dark => ThemeData(
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: _primary,
-      brightness: Brightness.dark,
-    ),
-    textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
+      seedColor: const Color(0xFF7C3AED), brightness: Brightness.dark),
+    textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
   );
 }
